@@ -8,7 +8,7 @@ let routes = app => {
   router.get("/admin", adminController.getAdmin);
 
   
-  router.post("/block", adminController.getAdmin);
+  router.post("/", adminController.getAdmin);
 
   return app.use("/", router);
 };

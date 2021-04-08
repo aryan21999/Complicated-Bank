@@ -2,6 +2,9 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<h2>Welcome Admin</h2> 
+
 <style>
 * {box-sizing: border-box;}
 
@@ -78,7 +81,7 @@ body {
   }
 }
 </style>
-</head>
+
 <body>
 
 <div class="topnav">
@@ -92,12 +95,19 @@ body {
     </form>
   </div>
 </div>
+<span id="table"> </span>
 
-<div style="padding-left:16px">
-  <h2>Responsive Search Bar</h2>
-  <p>Navigation bar with a search box and a submit button inside of it.</p>
-  <p>Resize the browser window to see the responsive effect.</p>
-</div>
+<form id="form1">
+				
+				<input id="a1" type="button" value="Add Account" /> <span id="addAcc"></span> </br>
+				<input id="a2" type="button" value="Deposit"  /> <span id="dep"></span></br>
+				<input id="a4" type="button" value="transfer" /> <span id="trans"></span></br>
+			</form>
 
+
+<br> <font color="red"><span id="msg" ></span> </font> <br>
+  <a href="/logout">To log out click here</a> 
+<script type="text/javascript" src="./controllers/block.js">	</script>
+<script type="text/javascript" src="purify.min.js"></script>
 </body>
 </html>
