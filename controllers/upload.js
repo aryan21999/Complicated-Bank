@@ -1,3 +1,4 @@
+const { response } = require("express");
 const upload = require("../middleware/upload");
 
 const uploadFile = async (req, res) => {
@@ -9,7 +10,8 @@ const uploadFile = async (req, res) => {
       return res.send(`You must select a file.`);
     }
 
-    return res.send(`File Has Been Uploaded Sucessfully.Now Go To Login Page.`);
+    // return res.send(`File has been uploaded.`);
+     response.redirect('/login');
   } catch (error) {
     console.log(error);
     return res.send(`Error when trying upload image: ${error}`);

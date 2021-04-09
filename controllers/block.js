@@ -1,9 +1,77 @@
-
-
 "use strict"
 var imported = document.createElement('script');
 imported.src = 'purify.min.js';
 document.head.appendChild(imported);
+function update() {
+var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){ 
+			var xmlDoc = xhttp.responseXML;
+			document.getElementById("name").innerHTML = DOMPurify.sanitize("Welcome "+ xmlDoc.getElementsByTagName("username")[0].childNodes[0].nodeValue);
+			var accName = xmlDoc.getElementsByTagName("accname");
+			var balance = xmlDoc.getElementsByTagName("balance");
+			var html ='<table border="1"> <tr><td> Account Name</td> <td> Account Balance</td></tr>';
+			for (var i=0; accName.length > i; i++){
+				html+= '<tr><td>'+ accName[i].childNodes[0].nodeValue + '</td><td>'+ balance[i].childNodes[0].nodeValue+'</td></tr>';
+			
+			};
+			html= DOMPurify.sanitize(html);
+			document.getElementById("table").innerHTML= html;
+
+
+ 		 };
+	};
+
+  xhttp.open("POST", "profile", true);
+  xhttp.setRequestHeader('Content-Type', 'text/xml');
+  xhttp.send('<?xml version="1.0" encoding="UTF-8"?><request>request account information</request>');
+	
+
+};
+
+
+
+
+
+function addAcc(){
+document.getElementById("msg").innerHTML ="";
+document.getElementById("dep").innerHTML ="";
+document.getElementById("wit").innerHTML ="";
+document.getElementById("trans").innerHTML ="";
+
+	if (document.getElementById("addAcc").innerHTML =="") {
+		document.getElementById("addAcc").innerHTML= 'New account name: <input type="text" name="accname" placeholder="New account name" required=""> New Account balance: <input type="text" name="balance" placeholder="Starting balance" required=""> <input id="b1" type="button" value="Create" /> ';
+document.querySelector('#b1').addEventListener('click',create);
+		}
+		else {
+		document.getElementById("addAcc").innerHTML ="";
+		};
+
+};
+
+function create() {
+  	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		var xmlDoc = xhttp.responseXML;
+		var msg = DOMPurify.sanitize(xmlDoc.getElementsByTagName("success")[0].childNodes[0].nodeValue);	
+ 		if (msg =="Account Added"){
+
+			document.getElementById("msg").innerHTML =  msg;
+			document.getElementById("addAcc").innerHTML="";
+			update();
+    		}else{
+			document.getElementById("msg").innerHTML = msg;
+		};
+  	};};
+
+ 	 xhttp.open("POST", "addaccount", true);
+ 	 xhttp.setRequestHeader('Content-Type', 'text/xml');
+
+	var form = new FormData(document.getElementById("form1"));
+	var data = '<?xml version="1.0" encoding="UTF-8"?><account><accname>'+ form.get("accname") + "</accname><balance>"+form.get("balance") + "</balance></account>";
+  	xhttp.send(data);
+};
 
 function deposit() {
     document.getElementById("msg").innerHTML ="";

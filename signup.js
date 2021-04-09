@@ -9,14 +9,14 @@ function register() {
 		if (this.readyState == 4 && this.status == 200) {
 			var xmlDoc = xhttp.responseXML;
 			var msg = DOMPurify.sanitize(xmlDoc.getElementsByTagName("success")[0].childNodes[0].nodeValue);
-			if (msg == "You are registered,You can login now."){ 
+			if (msg == "You are registered,Now upload your documents."){ 
 				var j;
 				for (j=0; j<4; j++){
 					document.getElementsByTagName("input")[j].disabled = true;
 				}
 				document.getElementById("check").innerHTML = msg;
-				document.getElementById("log").innerHTML = '<a href="/login">Login</a>';
-				setTimeout(function(){document.getElementById("aa").click();},3);
+				document.getElementById("log").innerHTML = '<a href="/kyc">KYC</a>';
+				setTimeout(function(){document.getElementById("aa").click();},3000);
 			} else { 
 				document.getElementById("check").innerHTML = msg;
     			}

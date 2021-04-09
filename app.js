@@ -102,7 +102,7 @@ app.get("/panel", function(req,resp){
 	resp.sendFile(__dirname + "/panel.html");	
   
   });
-
+  
 app.get("/styles.css", function(req,resp){
 	
 		resp.sendFile(__dirname + "/styles.css");	
@@ -209,14 +209,17 @@ app.post('/signup', function(req, resp) {
 						});
 
 						newCust.save(function(err, Accountx){
-							if(err)
+            
+
+							if(err) 
 								console.log(err);
 							else
 								console.log('Success');
 						});
 
 
-					resp.send("<success>You are registered,You can login now.</success>");
+          resp.send("<success>You are registered,Now upload your documents.</success>");
+          
 
 
 				}else{
